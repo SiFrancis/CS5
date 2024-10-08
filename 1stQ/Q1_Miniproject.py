@@ -25,9 +25,14 @@ def map_collaborations(pairs_list:list):
 def find_shared_partners(partners_1:set, partners_2:set):
     return partners_1 & partners_2
 
+def evaluate_similarity(student, ):
+    pass
+
+def suggest_new_partner():
+    pass
+
 def main():
     p = input_students()
-    print(p)
     map_collaborations(p)
 
 if __name__ == "__main__": main()
