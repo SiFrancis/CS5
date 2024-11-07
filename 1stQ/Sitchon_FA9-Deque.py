@@ -10,7 +10,7 @@ class Deque():
         self.items.insert(0, item)
     
     def add_rear(self, item):
-        self.items.push(item)
+        self.items.append(item)
         
     def remove_front(self):
         out = self.items[0]
@@ -23,10 +23,13 @@ class Deque():
     def is_empty(self):
         return self.items == []
 
-d = Deque()
-d.add_rear(1)
-d.add_rear(2)
-d.add_rear(3)
-d.add_rear(4)
-x = d.remove_front()
-print(x)
+def main():
+    dq_front, dq_rear = Deque(), Deque()
+    inp = str(input("Input: "))
+    for char in inp:
+        dq_front.add_front(char.lower())
+        dq_rear.add_rear(char.lower())
+    print("Output:", dq_front.items == dq_rear.items)
+
+if __name__ == "__main__":
+    main()
