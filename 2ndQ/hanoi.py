@@ -14,6 +14,8 @@ class Column:
         return self.items[-1]
     def size(self):
         return len(self.items)
+    def copyFrom(self, target):
+        self.items = target.items
     
     # custom operations for column
     def isValid(self):
