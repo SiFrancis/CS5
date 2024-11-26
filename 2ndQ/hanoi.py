@@ -23,22 +23,51 @@ class Column:
         for idx, val in enumerate(self.items[:-1]):
             if val < self.items[idx+1]: valid = False
         return valid
-            
 
-def transfer(colFrom, colTo):
-    colTo.push(colFrom.peek())
-    colFrom.pop()
+c1, c2, c3 = Column(), Column(), Column()            
+columns = [c1, c2, c3]
+steps = 0
 
-def view(*cols):
-    for col in cols: print(col.items)
+def transfer(n, colFrom, colTo):
+    if n:
+        colTo.push(colFrom.peek())
+        colFrom.pop()
 
-c1 = Column()
-c1.push(4)
-# c1.push(3)
-c1.push(2)
-c1.push(1)
-c2, c3 = Column(), Column()
+def view():
+    for col in columns:
+        print(col.items)
+    print(False not in [col.isValid() for col in columns])
+    print()
 
-transfer(c1, c3)
+def algo(n, startCol, endCol):
+    global steps
+    cols_list = columns.copy()
+    cols_list.remove(startCol)
+    cols_list.remove(endCol)
+    otherCol = cols_list[0]
+    if n == 1:
+        transfer(n, startCol, endCol)
+        steps += 1
+        print(f'Step {steps}')
+        view()
+    elif n > 1:
+        algo(n-1, startCol, otherCol)
+        transfer(n, startCol, endCol)
+        steps += 1
+        print(f'Step {steps}')
+        view()
+        algo(n-1, otherCol, endCol)
 
-view(c1, c2, c3)
+def main():
+    discs_num = 20
+    for i in reversed(range(discs_num)):
+        c1.push(i+1)
+    print("START:")
+    view()
+    algo(discs_num, c1, c3)
+    print("END:")
+    view()
+    print()
+    print(steps)
+
+if __name__ == "__main__": main()
