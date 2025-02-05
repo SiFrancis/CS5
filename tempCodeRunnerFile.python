@@ -1,32 +1,26 @@
-class Deque():
-    # double ended queue
-    def __init__(self):
-        self.items = []
-        
-    def __len__(self):
-        return len(self.items)
-    
-    def add_front(self, item):
-        self.items.insert(0, item)
-    
-    def add_rear(self, item):
-        self.items.push(item)
-        
-    def remove_front(self):
-        out = self.items[0]
-        self.items = self.items[1:]
-        return out
-    
-    def remove_rear(self):
-        return self.items.pop()
-    
-    def is_empty(self):
-        return self.items == []
+import heapq
 
-d = Deque()
-d.add_rear(1)
-d.add_rear(2)
-d.add_rear(3)
-d.add_rear(4)
-x = d.remove_front()
-print(x)
+class Order:
+    def __init__(self, id:int, urgency:int, timestamp:str):
+        self.id = id
+        self.urgency = urgency
+        self.timestamp = timestamp
+
+class OrderQueue:
+    def __init__(self):
+        self.queue = [] # contains Order instances
+        self.order_heap = [x.urgency for x in self.queue]
+    
+    def insert(self, item:Order):
+        self.queue.append(item)
+
+o1 = Order(0, 2, "A")
+o2 = Order(1, 3, "B")
+o3 = Order(2, 1, "C")
+
+queue = OrderQueue()
+queue.insert(o1)
+queue.insert(o2)
+queue.insert(o3)
+
+print(queue.order_heap)
