@@ -23,6 +23,8 @@ class Graph:
             self.graph[dest].append(src)
         if self.distancesOn:
             self.distances[(src, dest)] = distance
+            if not self.directed: 
+                self.distances[(dest, src)] = distance
     
     def print_graph(self):
         # adjacency list
@@ -71,7 +73,7 @@ class Graph:
         for node in self.nodes:
             print(f"{src} to {node} is {dist[node]} distance")
     
-    def djikstra(self, src):
+    def dijkstra(self, src):
         dist = dict()
         for n in self.nodes: dist[n] = maxsize
         dist[src] = 0
@@ -106,4 +108,4 @@ if __name__ == "__main__":
     g.add_edge('F', 'G', 2)
     g.add_edge('F', 'H', 15)
     g.add_edge('G', 'H', 8)
-    g.djikstra('A')
+    g.dkstra('A')
